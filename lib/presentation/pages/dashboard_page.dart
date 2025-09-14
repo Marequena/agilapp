@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../../presentation/controllers/auth_controller.dart';
-import '../../core/widgets/metro_button.dart';
+import '../../core/widgets/widgets.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 
 class DashboardPage extends StatelessWidget {
@@ -43,31 +43,36 @@ class DashboardPage extends StatelessWidget {
               crossAxisSpacing: 12,
               itemCount: 10,
               itemBuilder: (context, index) {
-                // define varied sizes and variants for visual variety
-                final variants = [
-                  MetroVariant.primary,
-                  MetroVariant.success,
-                  MetroVariant.warning,
-                  MetroVariant.danger,
-                  MetroVariant.neutral,
-                ];
-                final sizes = [MetroSize.large, MetroSize.medium, MetroSize.small];
-                final v = variants[index % variants.length];
-                final s = sizes[index % sizes.length];
                 final labels = ['Ventas', 'Clientes', 'Reportes', 'Inventario', 'Ajustes', 'Usuarios', 'Pagos', 'Calendario', 'Notificaciones', 'Soporte'];
                 final icons = [
                   Icons.point_of_sale,
                   Icons.people,
-                  Icons.bar_chart, // reportes
-                  Icons.inventory, // inventario
+                  Icons.bar_chart,
+                  Icons.inventory,
                   Icons.settings,
-                  Icons.person_add, // usuarios
-                  Icons.payment, // pagos
-                  Icons.calendar_today, // calendario
-                  Icons.notifications, // notificaciones
-                  Icons.headset_mic, // soporte
+                  Icons.person_add,
+                  Icons.payment,
+                  Icons.calendar_today,
+                  Icons.notifications,
+                  Icons.headset_mic,
                 ];
-                return MetroButton(label: labels[index], icon: icons[index], variant: v, size: s, fullWidth: true, onPressed: () {});
+                final colors = [
+                  Colors.teal.shade400,
+                  Colors.deepPurple.shade400,
+                  Colors.amber.shade600,
+                  Colors.cyan.shade400,
+                  Colors.indigo.shade600,
+                  Colors.pink.shade400,
+                  Colors.deepOrange.shade400,
+                  Colors.lightGreen.shade500,
+                  Colors.blueAccent.shade700,
+                  Colors.deepPurpleAccent.shade400,
+                ];
+
+                // varied heights to mimic Metro live tile sizes
+                final heights = [180.0, 120.0, 140.0, 160.0, 100.0, 140.0, 120.0, 160.0, 130.0, 150.0];
+
+                return MetroTile(label: labels[index], icon: icons[index], color: colors[index], height: heights[index], onTap: () {});
               },
             ),
           ),
