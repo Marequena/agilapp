@@ -55,7 +55,19 @@ class DashboardPage extends StatelessWidget {
                 final v = variants[index % variants.length];
                 final s = sizes[index % sizes.length];
                 final labels = ['Ventas', 'Clientes', 'Reportes', 'Inventario', 'Ajustes', 'Usuarios', 'Pagos', 'Calendario', 'Notificaciones', 'Soporte'];
-                return MetroButton(label: labels[index], icon: Icons.circle, variant: v, size: s, fullWidth: true, onPressed: () {});
+                final icons = [
+                  Icons.point_of_sale,
+                  Icons.people,
+                  Icons.bar_chart, // reportes
+                  Icons.inventory, // inventario
+                  Icons.settings,
+                  Icons.person_add, // usuarios
+                  Icons.payment, // pagos
+                  Icons.calendar_today, // calendario
+                  Icons.notifications, // notificaciones
+                  Icons.headset_mic, // soporte
+                ];
+                return MetroButton(label: labels[index], icon: icons[index], variant: v, size: s, fullWidth: true, onPressed: () {});
               },
             ),
           ),
