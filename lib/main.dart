@@ -1,6 +1,22 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'presentation/controllers/sample_controller.dart';
+import 'presentation/pages/sample_page.dart';
+import 'presentation/pages/design_demo.dart';
+import 'presentation/pages/dashboard_demo.dart';
+import 'data/repositories/sample_repository_impl.dart';
+import 'domain/usecases/get_items.dart';
+import 'core/theme/design_system.dart';
+import 'core/theme/color_tokens.dart';
 
-void main() => runApp(const AgilApp());
+void main() {
+  final repo = SampleRepositoryImpl();
+  final getItems = GetItems(repo);
+  runApp(Provider(
+    create: (_) => SampleController(getItems),
+    child: const AgilApp(),
+  ));
+}
 
 class AgilApp extends StatelessWidget {
   const AgilApp({Key? key}) : super(key: key);
@@ -9,20 +25,12 @@ class AgilApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'AgilApp',
-      theme: ThemeData(primarySwatch: Colors.blue),
-      home: const HomePage(),
-    );
-  }
-}
-
-class HomePage extends StatelessWidget {
-  const HomePage({Key? key}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(title: const Text('AgilApp')),
-      body: const Center(child: Text('Bienvenido a AgilApp!')),
+      theme: AppTheme.light().copyWith(primaryColor: ColorTokens.primarySwatch),
+      routes: {
+        '/': (_) => const SamplePage(),
+  '/design-demo': (_) => const DesignDemoPage(),
+  '/dashboard-demo': (_) => const DashboardDemoPage(),
+      },
     );
   }
 }
