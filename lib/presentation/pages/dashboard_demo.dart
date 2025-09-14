@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 // import '../../core/widgets/app_card.dart';
 // import '../../core/widgets/app_button.dart'; // not used here
+import 'package:provider/provider.dart';
+import '../../presentation/controllers/auth_controller.dart';
 import '../../core/widgets/metro_button.dart';
 
 class DashboardDemoPage extends StatelessWidget {
@@ -17,6 +19,24 @@ class DashboardDemoPage extends StatelessWidget {
           tooltip: 'Iniciar sesión',
           onPressed: () => Navigator.of(context).pushNamed('/login'),
         ),
+        actions: [
+          Builder(builder: (ctx) {
+            // use Builder to get context inside AppBar for Provider lookup
+            return IconButton(
+              icon: const Icon(Icons.logout),
+              tooltip: 'Cerrar sesión',
+              onPressed: () async {
+                try {
+                  final controller = Provider.of<AuthController?>(ctx, listen: false);
+                  if (controller != null) {
+                    await controller.logout();
+                  }
+                } catch (_) {}
+                Navigator.of(ctx).pushReplacementNamed('/login');
+              },
+            );
+          })
+        ],
       ),
       body: Padding(
         padding: const EdgeInsets.all(16),
