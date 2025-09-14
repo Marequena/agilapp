@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../utils/color_contrast.dart';
 
 class MetroTile extends StatelessWidget {
   final String label;
@@ -18,7 +19,7 @@ class MetroTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final fg = ThemeData.estimateBrightnessForColor(color) == Brightness.dark ? Colors.white : Colors.black87;
+    final fg = highContrastColor(color);
     return Material(
       color: color,
       borderRadius: BorderRadius.circular(8),

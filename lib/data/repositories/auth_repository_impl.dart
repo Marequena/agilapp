@@ -1,3 +1,4 @@
+import 'package:dio/dio.dart';
 import '../../domain/repositories/auth_repository.dart';
 import '../datasources/api_client.dart';
 import '../../core/storage/secure_storage.dart';
@@ -10,8 +11,8 @@ class AuthRepositoryImpl implements AuthRepository {
 
   @override
   Future<String?> login({required String email, required String password}) async {
-    final res = await _apiClient.post('/api/login', data: {'email': email, 'password': password});
     try {
+      final res = await _apiClient.post('/api/login', data: {'email': email, 'password': password});
       if (res.statusCode == 200 && res.data != null) {
         final data = res.data;
         if (data is Map && data['token'] != null) {
@@ -19,6 +20,12 @@ class AuthRepositoryImpl implements AuthRepository {
           await SecureStorage.saveToken(token);
           return token;
         }
+      }
+    } on DioException catch (e, st) {
+      developer.log('Auth login request failed', error: e, stackTrace: st);
+      // If unauthorized, return null so controller can show a friendly message
+      if (e.response != null && e.response?.statusCode == 401) {
+        return null;
       }
     } catch (e, st) {
       developer.log('Auth login parse failed', error: e, stackTrace: st);

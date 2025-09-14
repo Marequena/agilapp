@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import '../theme/design_system.dart';
+import '../utils/color_contrast.dart';
 
 enum AppButtonVariant { primary, secondary, outline, ghost }
 enum AppButtonSize { small, medium, large }
@@ -52,19 +53,20 @@ class AppButton extends StatelessWidget {
           child: ElevatedButton.icon(
             onPressed: onPressed,
             icon: icon != null ? Icon(icon, size: 18) : const SizedBox.shrink(),
-            label: Text(label, style: Theme.of(context).textTheme.bodyLarge?.copyWith(color: Colors.white)),
+            label: Text(label, style: Theme.of(context).textTheme.bodyLarge?.copyWith(color: highContrastColor(DesignColors.secondary))),
             style: ElevatedButton.styleFrom(backgroundColor: DesignColors.secondary, shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(DesignColors.cornerRadius))),
           ),
         );
       case AppButtonVariant.primary:
       default:
+        final bg = Theme.of(context).colorScheme.primary;
         return SizedBox(
           height: _height,
           child: ElevatedButton.icon(
             onPressed: onPressed,
-            icon: icon != null ? Icon(icon, size: 18) : const SizedBox.shrink(),
-            label: Text(label, style: Theme.of(context).textTheme.bodyLarge?.copyWith(color: Colors.white)),
-            style: ElevatedButton.styleFrom(shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(DesignColors.cornerRadius))),
+            icon: icon != null ? Icon(icon, size: 18, color: highContrastColor(bg)) : const SizedBox.shrink(),
+            label: Text(label, style: Theme.of(context).textTheme.bodyLarge?.copyWith(color: highContrastColor(bg))),
+            style: ElevatedButton.styleFrom(backgroundColor: bg, shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(DesignColors.cornerRadius))),
           ),
         );
     }
