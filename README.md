@@ -12,4 +12,16 @@ flutter pub get
 flutter run
 ```
 
-Instrucciones para crear el repo en GitHub se encuentran en la sección 'Instrucciones GitHub' en este proyecto.
+Crear el repositorio remoto y empujar:
+
+1. Crear el repo en GitHub: github.com -> New repository -> Nombre: `agilapp` -> Crear.
+2. En tu terminal:
+
+```bash
+cd /Users/miguelrequena/Documents/IA/AGILAPP/agilapp
+git branch -M main
+git remote add origin https://github.com/<tu-usuario>/agilapp.git
+git push -u origin main
+```
+
+Sustituye `<tu-usuario>` por tu usuario de GitHub.
