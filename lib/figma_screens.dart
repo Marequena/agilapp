@@ -80,7 +80,7 @@ class Screen_Adjuntos extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(title: const Text('adjuntos')),
       body: Center(
-        child: Image.asset('assets/figma/adjuntos-2128:1702.png'),
+        child: Image.asset('assets/figma/adjuntos.png'),
       ),
     );
   }
@@ -93,7 +93,7 @@ class Screen_Adjuntos extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(title: const Text('adjuntos')),
       body: Center(
-        child: Image.asset('assets/figma/adjuntos-2128:941.png'),
+        child: Image.asset('assets/figma/adjuntos.png'),
       ),
     );
   }
@@ -106,7 +106,7 @@ class Screen_AprobarSala extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(title: const Text('aprobar_sala')),
       body: Center(
-        child: Image.asset('assets/figma/aprobar_sala-2128:1991.png'),
+        child: Image.asset('assets/figma/aprobar_sala.png'),
       ),
     );
   }
@@ -119,7 +119,7 @@ class Screen_AprobarVehiculo extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(title: const Text('aprobar_vehiculo')),
       body: Center(
-        child: Image.asset('assets/figma/aprobar_vehiculo-2128:2595.png'),
+        child: Image.asset('assets/figma/aprobar_vehiculo.png'),
       ),
     );
   }
@@ -132,7 +132,7 @@ class Screen_Calendario extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(title: const Text('calendario')),
       body: Center(
-        child: Image.asset('assets/figma/calendario-2128:1835.png'),
+        child: Image.asset('assets/figma/calendario.png'),
       ),
     );
   }
@@ -145,7 +145,7 @@ class Screen_Calendario extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(title: const Text('calendario')),
       body: Center(
-        child: Image.asset('assets/figma/calendario-2128:1861.png'),
+        child: Image.asset('assets/figma/calendario.png'),
       ),
     );
   }
@@ -158,7 +158,7 @@ class Screen_DetallePedidoCerrado extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(title: const Text('detalle_pedido_cerrado')),
       body: Center(
-        child: Image.asset('assets/figma/detalle_pedido_cerrado-2128:3318.png'),
+        child: Image.asset('assets/figma/detalle_pedido_cerrado.png'),
       ),
     );
   }
@@ -171,7 +171,7 @@ class Screen_DetallePedidoDelay extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(title: const Text('detalle_pedido_delay')),
       body: Center(
-        child: Image.asset('assets/figma/detalle_pedido_delay-2128:3122.png'),
+        child: Image.asset('assets/figma/detalle_pedido_delay.png'),
       ),
     );
   }
@@ -184,7 +184,7 @@ class Screen_DetallePedidoDelay extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(title: const Text('detalle_pedido_delay')),
       body: Center(
-        child: Image.asset('assets/figma/detalle_pedido_delay-2128:3224.png'),
+        child: Image.asset('assets/figma/detalle_pedido_delay.png'),
       ),
     );
   }
@@ -197,7 +197,7 @@ class Screen_DetallePedidoDelay extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(title: const Text('detalle_pedido_delay')),
       body: Center(
-        child: Image.asset('assets/figma/detalle_pedido_delay-2128:3418.png'),
+        child: Image.asset('assets/figma/detalle_pedido_delay.png'),
       ),
     );
   }
@@ -210,7 +210,7 @@ class Screen_DetallePedidoDelay extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(title: const Text('detalle_pedido_delay')),
       body: Center(
-        child: Image.asset('assets/figma/detalle_pedido_delay-2128:3457.png'),
+        child: Image.asset('assets/figma/detalle_pedido_delay.png'),
       ),
     );
   }
@@ -223,7 +223,7 @@ class Screen_DetallePedidoDelay extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(title: const Text('detalle_pedido_delay')),
       body: Center(
-        child: Image.asset('assets/figma/detalle_pedido_delay-2128:3531.png'),
+        child: Image.asset('assets/figma/detalle_pedido_delay.png'),
       ),
     );
   }
@@ -236,7 +236,7 @@ class Screen_DetallePedidoDelay extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(title: const Text('detalle_pedido_delay')),
       body: Center(
-        child: Image.asset('assets/figma/detalle_pedido_delay-2128:4240.png'),
+        child: Image.asset('assets/figma/detalle_pedido_delay.png'),
       ),
     );
   }
@@ -249,7 +249,7 @@ class Screen_DetallePedidoEnEntrega extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(title: const Text('detalle_pedido_en_entrega')),
       body: Center(
-        child: Image.asset('assets/figma/detalle_pedido_en_entrega-2128:3744.png'),
+        child: Image.asset('assets/figma/detalle_pedido_en_entrega.png'),
       ),
     );
   }
@@ -262,7 +262,7 @@ class Screen_DetallePedidoNoRecibido extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(title: const Text('detalle_pedido_no_recibido')),
       body: Center(
-        child: Image.asset('assets/figma/detalle_pedido_no_recibido-2128:3022.png'),
+        child: Image.asset('assets/figma/detalle_pedido_no_recibido.png'),
       ),
     );
   }
@@ -275,7 +275,7 @@ class Screen_DetallePedidoTransporte extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(title: const Text('detalle_pedido_transporte')),
       body: Center(
-        child: Image.asset('assets/figma/detalle_pedido_transporte-2128:3667.png'),
+        child: Image.asset('assets/figma/detalle_pedido_transporte.png'),
       ),
     );
   }
@@ -288,7 +288,7 @@ class Screen_DetallePedidoTransporte extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(title: const Text('detalle_pedido_transporte')),
       body: Center(
-        child: Image.asset('assets/figma/detalle_pedido_transporte-2128:3821.png'),
+        child: Image.asset('assets/figma/detalle_pedido_transporte.png'),
       ),
     );
   }
@@ -301,7 +301,7 @@ class Screen_DetalleProducto extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(title: const Text('detalle_producto')),
       body: Center(
-        child: Image.asset('assets/figma/detalle_producto-2128:4109.png'),
+        child: Image.asset('assets/figma/detalle_producto.png'),
       ),
     );
   }
@@ -314,7 +314,7 @@ class Screen_DetalleSolicitudAnt extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(title: const Text('detalle_solicitud_ant')),
       body: Center(
-        child: Image.asset('assets/figma/detalle_solicitud_ant-2128:909.png'),
+        child: Image.asset('assets/figma/detalle_solicitud_ant.png'),
       ),
     );
   }
@@ -327,7 +327,7 @@ class Screen_DetalleSolicitudPago extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(title: const Text('detalle_solicitud_pago')),
       body: Center(
-        child: Image.asset('assets/figma/detalle_solicitud_pago-2128:1664.png'),
+        child: Image.asset('assets/figma/detalle_solicitud_pago.png'),
       ),
     );
   }
@@ -340,7 +340,7 @@ class Screen_DetalleSolicitudSala extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(title: const Text('detalle_solicitud_sala')),
       body: Center(
-        child: Image.asset('assets/figma/detalle_solicitud_sala-2128:2037.png'),
+        child: Image.asset('assets/figma/detalle_solicitud_sala.png'),
       ),
     );
   }
@@ -353,7 +353,7 @@ class Screen_DetalleSolicitudVacaciones extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(title: const Text('detalle_solicitud_vacaciones')),
       body: Center(
-        child: Image.asset('assets/figma/detalle_solicitud_vacaciones-2128:1326.png'),
+        child: Image.asset('assets/figma/detalle_solicitud_vacaciones.png'),
       ),
     );
   }
@@ -366,7 +366,7 @@ class Screen_DetalleSolicitudVehiculo extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(title: const Text('detalle_solicitud_vehiculo')),
       body: Center(
-        child: Image.asset('assets/figma/detalle_solicitud_vehiculo-2128:2692.png'),
+        child: Image.asset('assets/figma/detalle_solicitud_vehiculo.png'),
       ),
     );
   }
@@ -379,7 +379,7 @@ class Screen_DetalleTarea extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(title: const Text('detalle_tarea')),
       body: Center(
-        child: Image.asset('assets/figma/detalle_tarea-2128:1073.png'),
+        child: Image.asset('assets/figma/detalle_tarea.png'),
       ),
     );
   }
@@ -392,7 +392,7 @@ class Screen_DetalleTarea extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(title: const Text('detalle_tarea')),
       body: Center(
-        child: Image.asset('assets/figma/detalle_tarea-2128:1113.png'),
+        child: Image.asset('assets/figma/detalle_tarea.png'),
       ),
     );
   }
@@ -405,7 +405,7 @@ class Screen_DetalleTarea extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(title: const Text('detalle_tarea')),
       body: Center(
-        child: Image.asset('assets/figma/detalle_tarea-2128:1131.png'),
+        child: Image.asset('assets/figma/detalle_tarea.png'),
       ),
     );
   }
@@ -418,7 +418,7 @@ class Screen_FormularioVacaciones extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(title: const Text('formulario_vacaciones')),
       body: Center(
-        child: Image.asset('assets/figma/formulario_vacaciones-2128:1266.png'),
+        child: Image.asset('assets/figma/formulario_vacaciones.png'),
       ),
     );
   }
@@ -431,7 +431,7 @@ class Screen_HistorialAsistencia extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(title: const Text('historial_asistencia')),
       body: Center(
-        child: Image.asset('assets/figma/historial_asistencia-2128:855.png'),
+        child: Image.asset('assets/figma/historial_asistencia.png'),
       ),
     );
   }
@@ -444,7 +444,7 @@ class Screen_IconosEstado extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(title: const Text('iconos_estado')),
       body: Center(
-        child: Image.asset('assets/figma/iconos_estado-I2128:2755;1:285.png'),
+        child: Image.asset('assets/figma/iconos_estado.png'),
       ),
     );
   }
@@ -457,7 +457,7 @@ class Screen_IconosEstado extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(title: const Text('iconos_estado')),
       body: Center(
-        child: Image.asset('assets/figma/iconos_estado-I2128:4383;1:285.png'),
+        child: Image.asset('assets/figma/iconos_estado.png'),
       ),
     );
   }
@@ -470,7 +470,7 @@ class Screen_IconosEstado extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(title: const Text('iconos_estado')),
       body: Center(
-        child: Image.asset('assets/figma/iconos_estado-I2128:4474;1:285.png'),
+        child: Image.asset('assets/figma/iconos_estado.png'),
       ),
     );
   }
@@ -483,7 +483,7 @@ class Screen_IconosEstado extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(title: const Text('iconos_estado')),
       body: Center(
-        child: Image.asset('assets/figma/iconos_estado-I2128:4516;1:285.png'),
+        child: Image.asset('assets/figma/iconos_estado.png'),
       ),
     );
   }
@@ -496,7 +496,7 @@ class Screen_IconosEstado extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(title: const Text('iconos_estado')),
       body: Center(
-        child: Image.asset('assets/figma/iconos_estado-I2128:765;1:285.png'),
+        child: Image.asset('assets/figma/iconos_estado.png'),
       ),
     );
   }
@@ -509,7 +509,7 @@ class Screen_Inicio1 extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(title: const Text('inicio_1')),
       body: Center(
-        child: Image.asset('assets/figma/inicio_1-2128:4461.png'),
+        child: Image.asset('assets/figma/inicio_1.png'),
       ),
     );
   }
@@ -522,7 +522,7 @@ class Screen_Inicio2 extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(title: const Text('inicio_2')),
       body: Center(
-        child: Image.asset('assets/figma/inicio_2-2128:4369.png'),
+        child: Image.asset('assets/figma/inicio_2.png'),
       ),
     );
   }
@@ -535,7 +535,7 @@ class Screen_InicioNotificaciones extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(title: const Text('inicio_notificaciones')),
       body: Center(
-        child: Image.asset('assets/figma/inicio_notificaciones-2128:2747.png'),
+        child: Image.asset('assets/figma/inicio_notificaciones.png'),
       ),
     );
   }
@@ -548,7 +548,7 @@ class Screen_Iphone131 extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(title: const Text('iphone_13_1')),
       body: Center(
-        child: Image.asset('assets/figma/iphone_13_1-2128:2185.png'),
+        child: Image.asset('assets/figma/iphone_13_1.png'),
       ),
     );
   }
@@ -561,7 +561,7 @@ class Screen_Iphone132 extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(title: const Text('iphone_13_2')),
       body: Center(
-        child: Image.asset('assets/figma/iphone_13_2-2128:4494.png'),
+        child: Image.asset('assets/figma/iphone_13_2.png'),
       ),
     );
   }
@@ -574,7 +574,7 @@ class Screen_LikeNotch extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(title: const Text('like_notch')),
       body: Center(
-        child: Image.asset('assets/figma/like_notch-I2128:2755;1:291;1:260.png'),
+        child: Image.asset('assets/figma/like_notch.png'),
       ),
     );
   }
@@ -587,7 +587,7 @@ class Screen_LikeNotch extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(title: const Text('like_notch')),
       body: Center(
-        child: Image.asset('assets/figma/like_notch-I2128:4383;1:291;1:260.png'),
+        child: Image.asset('assets/figma/like_notch.png'),
       ),
     );
   }
@@ -600,7 +600,7 @@ class Screen_LikeNotch extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(title: const Text('like_notch')),
       body: Center(
-        child: Image.asset('assets/figma/like_notch-I2128:4474;1:291;1:260.png'),
+        child: Image.asset('assets/figma/like_notch.png'),
       ),
     );
   }
@@ -613,7 +613,7 @@ class Screen_LikeNotch extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(title: const Text('like_notch')),
       body: Center(
-        child: Image.asset('assets/figma/like_notch-I2128:4516;1:291;1:260.png'),
+        child: Image.asset('assets/figma/like_notch.png'),
       ),
     );
   }
@@ -626,7 +626,7 @@ class Screen_LikeNotch extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(title: const Text('like_notch')),
       body: Center(
-        child: Image.asset('assets/figma/like_notch-I2128:765;1:291;1:260.png'),
+        child: Image.asset('assets/figma/like_notch.png'),
       ),
     );
   }
@@ -639,7 +639,7 @@ class Screen_ListaSolicitudesAnt extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(title: const Text('lista_solicitudes_ant')),
       body: Center(
-        child: Image.asset('assets/figma/lista_solicitudes_ant-2128:782.png'),
+        child: Image.asset('assets/figma/lista_solicitudes_ant.png'),
       ),
     );
   }
@@ -652,7 +652,7 @@ class Screen_ListaSolicitudesPago extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(title: const Text('lista_solicitudes_pago')),
       body: Center(
-        child: Image.asset('assets/figma/lista_solicitudes_pago-2128:1581.png'),
+        child: Image.asset('assets/figma/lista_solicitudes_pago.png'),
       ),
     );
   }
@@ -665,7 +665,7 @@ class Screen_Login extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(title: const Text('login')),
       body: Center(
-        child: Image.asset('assets/figma/login-2128:743.png'),
+        child: Image.asset('assets/figma/login.png'),
       ),
     );
   }
@@ -678,7 +678,7 @@ class Screen_LogoGoogle extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(title: const Text('logo_google')),
       body: Center(
-        child: Image.asset('assets/figma/logo_google-2128:768.png'),
+        child: Image.asset('assets/figma/logo_google.png'),
       ),
     );
   }
@@ -691,7 +691,7 @@ class Screen_MapaEnvio extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(title: const Text('mapa_envio')),
       body: Center(
-        child: Image.asset('assets/figma/mapa_envio-2128:4310.png'),
+        child: Image.asset('assets/figma/mapa_envio.png'),
       ),
     );
   }
@@ -704,7 +704,7 @@ class Screen_MisPedidos extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(title: const Text('mis_pedidos')),
       body: Center(
-        child: Image.asset('assets/figma/mis_pedidos-2128:4143.png'),
+        child: Image.asset('assets/figma/mis_pedidos.png'),
       ),
     );
   }
@@ -717,7 +717,7 @@ class Screen_Notificaciones extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(title: const Text('notificaciones')),
       body: Center(
-        child: Image.asset('assets/figma/notificaciones-2128:2099.png'),
+        child: Image.asset('assets/figma/notificaciones.png'),
       ),
     );
   }
@@ -730,7 +730,7 @@ class Screen_NuevaTarea extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(title: const Text('nueva_tarea')),
       body: Center(
-        child: Image.asset('assets/figma/nueva_tarea-2128:1164.png'),
+        child: Image.asset('assets/figma/nueva_tarea.png'),
       ),
     );
   }
@@ -743,7 +743,7 @@ class Screen_NuevaTarea extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(title: const Text('nueva_tarea')),
       body: Center(
-        child: Image.asset('assets/figma/nueva_tarea-2128:1221.png'),
+        child: Image.asset('assets/figma/nueva_tarea.png'),
       ),
     );
   }
@@ -756,7 +756,7 @@ class Screen_PedidosEntregados extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(title: const Text('pedidos_entregados')),
       body: Center(
-        child: Image.asset('assets/figma/pedidos_entregados-2128:2388.png'),
+        child: Image.asset('assets/figma/pedidos_entregados.png'),
       ),
     );
   }
@@ -769,7 +769,7 @@ class Screen_PedidosPendientes extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(title: const Text('pedidos_pendientes')),
       body: Center(
-        child: Image.asset('assets/figma/pedidos_pendientes-2128:2295.png'),
+        child: Image.asset('assets/figma/pedidos_pendientes.png'),
       ),
     );
   }
@@ -782,7 +782,7 @@ class Screen_PedidosRetrasados extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(title: const Text('pedidos_retrasados')),
       body: Center(
-        child: Image.asset('assets/figma/pedidos_retrasados-2128:2447.png'),
+        child: Image.asset('assets/figma/pedidos_retrasados.png'),
       ),
     );
   }
@@ -795,7 +795,7 @@ class Screen_PedidosRetrasados extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(title: const Text('pedidos_retrasados')),
       body: Center(
-        child: Image.asset('assets/figma/pedidos_retrasados-2128:2503.png'),
+        child: Image.asset('assets/figma/pedidos_retrasados.png'),
       ),
     );
   }
@@ -808,7 +808,7 @@ class Screen_RegistroSala extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(title: const Text('registro_sala')),
       body: Center(
-        child: Image.asset('assets/figma/registro_sala-2128:1779.png'),
+        child: Image.asset('assets/figma/registro_sala.png'),
       ),
     );
   }
@@ -821,7 +821,7 @@ class Screen_RegistroVacaciones extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(title: const Text('registro_vacaciones')),
       body: Center(
-        child: Image.asset('assets/figma/registro_vacaciones-2128:1425.png'),
+        child: Image.asset('assets/figma/registro_vacaciones.png'),
       ),
     );
   }
@@ -834,7 +834,7 @@ class Screen_RegistroVacaciones extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(title: const Text('registro_vacaciones')),
       body: Center(
-        child: Image.asset('assets/figma/registro_vacaciones-2128:1499.png'),
+        child: Image.asset('assets/figma/registro_vacaciones.png'),
       ),
     );
   }
@@ -847,7 +847,7 @@ class Screen_RegistroVacaciones extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(title: const Text('registro_vacaciones')),
       body: Center(
-        child: Image.asset('assets/figma/registro_vacaciones-2128:1519.png'),
+        child: Image.asset('assets/figma/registro_vacaciones.png'),
       ),
     );
   }
@@ -860,7 +860,7 @@ class Screen_RegistroVehiculo extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(title: const Text('registro_vehiculo')),
       body: Center(
-        child: Image.asset('assets/figma/registro_vehiculo-2128:2215.png'),
+        child: Image.asset('assets/figma/registro_vehiculo.png'),
       ),
     );
   }
@@ -873,7 +873,7 @@ class Screen_RegistroVehiculo extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(title: const Text('registro_vehiculo')),
       body: Center(
-        child: Image.asset('assets/figma/registro_vehiculo-2128:2268.png'),
+        child: Image.asset('assets/figma/registro_vehiculo.png'),
       ),
     );
   }
@@ -886,7 +886,7 @@ class Screen_RegistroVehiculo extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(title: const Text('registro_vehiculo')),
       body: Center(
-        child: Image.asset('assets/figma/registro_vehiculo-2128:2560.png'),
+        child: Image.asset('assets/figma/registro_vehiculo.png'),
       ),
     );
   }
@@ -899,7 +899,7 @@ class Screen_RevisarSolicitudes extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(title: const Text('revisar_solicitudes')),
       body: Center(
-        child: Image.asset('assets/figma/revisar_solicitudes-2128:2982.png'),
+        child: Image.asset('assets/figma/revisar_solicitudes.png'),
       ),
     );
   }
@@ -912,7 +912,7 @@ class Screen_SinPedidos extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(title: const Text('sin_pedidos')),
       body: Center(
-        child: Image.asset('assets/figma/sin_pedidos-2128:3933.png'),
+        child: Image.asset('assets/figma/sin_pedidos.png'),
       ),
     );
   }
@@ -925,7 +925,7 @@ class Screen_SinPedidosEntrega extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(title: const Text('sin_pedidos_entrega')),
       body: Center(
-        child: Image.asset('assets/figma/sin_pedidos_entrega-2128:4278.png'),
+        child: Image.asset('assets/figma/sin_pedidos_entrega.png'),
       ),
     );
   }
@@ -938,7 +938,7 @@ class Screen_Tareas extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(title: const Text('tareas')),
       body: Center(
-        child: Image.asset('assets/figma/tareas-2128:2918.png'),
+        child: Image.asset('assets/figma/tareas.png'),
       ),
     );
   }
@@ -951,7 +951,7 @@ class Screen_TareasEscritorio extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(title: const Text('tareas_escritorio')),
       body: Center(
-        child: Image.asset('assets/figma/tareas_escritorio-2128:2846.png'),
+        child: Image.asset('assets/figma/tareas_escritorio.png'),
       ),
     );
   }
@@ -964,7 +964,7 @@ class Screen_Varios extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(title: const Text('varios')),
       body: Center(
-        child: Image.asset('assets/figma/varios-2128:4517.png'),
+        child: Image.asset('assets/figma/varios.png'),
       ),
     );
   }
