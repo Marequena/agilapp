@@ -1,36 +1,28 @@
 import 'package:flutter/material.dart';
 
-void main() {
-  runApp(const AgilApp());
-}
+void main() => runApp(const AgilApp());
 
 class AgilApp extends StatelessWidget {
-  const AgilApp({super.key});
+  const AgilApp({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'AgilApp',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-      ),
+      theme: ThemeData(primarySwatch: Colors.blue),
       home: const HomePage(),
     );
   }
 }
 
 class HomePage extends StatelessWidget {
-  const HomePage({super.key});
+  const HomePage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('AgilApp'),
-      ),
-      body: const Center(
-        child: Text('Bienvenido a AgilApp!'),
-      ),
+      appBar: AppBar(title: const Text('AgilApp')),
+      body: const Center(child: Text('Bienvenido a AgilApp!')),
     );
   }
 }
