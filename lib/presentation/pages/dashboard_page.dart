@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../../presentation/controllers/auth_controller.dart';
 import '../../core/widgets/metro_button.dart';
+import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 
 class DashboardPage extends StatelessWidget {
   const DashboardPage({Key? key}) : super(key: key);
@@ -36,18 +37,26 @@ class DashboardPage extends StatelessWidget {
           const Text('Accesos rápidos', style: TextStyle(fontSize: 18, fontWeight: FontWeight.w600)),
           const SizedBox(height: 12),
           Expanded(
-            child: GridView.count(
+            child: MasonryGridView.count(
               crossAxisCount: 2,
               mainAxisSpacing: 12,
               crossAxisSpacing: 12,
-              childAspectRatio: 3,
-              children: [
-                MetroButton(label: 'Ventas', icon: Icons.point_of_sale, variant: MetroVariant.primary, size: MetroSize.large, fullWidth: true, onPressed: () {}),
-                MetroButton(label: 'Clientes', icon: Icons.people, variant: MetroVariant.success, size: MetroSize.medium, fullWidth: true, onPressed: () {}),
-                MetroButton(label: 'Reportes', icon: Icons.pie_chart, variant: MetroVariant.warning, size: MetroSize.medium, fullWidth: true, onPressed: () {}),
-                MetroButton(label: 'Inventario', icon: Icons.inventory, variant: MetroVariant.neutral, size: MetroSize.large, fullWidth: true, onPressed: () {}),
-                MetroButton(label: 'Ajustes', icon: Icons.settings, variant: MetroVariant.primary, size: MetroSize.small, fullWidth: true, onPressed: () {}),
-              ],
+              itemCount: 10,
+              itemBuilder: (context, index) {
+                // define varied sizes and variants for visual variety
+                final variants = [
+                  MetroVariant.primary,
+                  MetroVariant.success,
+                  MetroVariant.warning,
+                  MetroVariant.danger,
+                  MetroVariant.neutral,
+                ];
+                final sizes = [MetroSize.large, MetroSize.medium, MetroSize.small];
+                final v = variants[index % variants.length];
+                final s = sizes[index % sizes.length];
+                final labels = ['Ventas', 'Clientes', 'Reportes', 'Inventario', 'Ajustes', 'Usuarios', 'Pagos', 'Calendario', 'Notificaciones', 'Soporte'];
+                return MetroButton(label: labels[index], icon: Icons.circle, variant: v, size: s, fullWidth: true, onPressed: () {});
+              },
             ),
           ),
         ]),
