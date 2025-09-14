@@ -17,7 +17,7 @@ class _SplashPageState extends State<SplashPage> {
       final auth = Provider.of<AuthController>(context, listen: false);
       await auth.init();
       if (auth.isAuthenticated) {
-        Navigator.of(context).pushReplacementNamed('/dashboard-demo');
+        Navigator.of(context).pushReplacementNamed('/dashboard');
       } else {
         Navigator.of(context).pushReplacementNamed('/login');
       }

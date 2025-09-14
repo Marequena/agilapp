@@ -52,7 +52,7 @@ class _LoginPageState extends State<LoginPage> {
 
                     final success = await auth.login(email, password);
                     if (success) {
-                      Navigator.of(context).pushReplacementNamed('/dashboard-demo');
+                      Navigator.of(context).pushReplacementNamed('/dashboard');
                     } else {
                       ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Login failed')));
                     }

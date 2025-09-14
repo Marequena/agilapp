@@ -4,7 +4,7 @@ import 'presentation/controllers/sample_controller.dart';
 import 'presentation/controllers/auth_controller.dart';
 import 'data/repositories/auth_repository_impl.dart';
 import 'presentation/pages/design_demo.dart';
-import 'presentation/pages/dashboard_demo.dart';
+import 'presentation/pages/dashboard_page.dart';
 import 'presentation/pages/splash_page.dart';
 import 'presentation/pages/login_page.dart';
 import 'data/repositories/sample_repository_impl.dart';
@@ -41,7 +41,7 @@ class AgilApp extends StatelessWidget {
       routes: {
   '/': (_) => const SplashPage(),
   '/design-demo': (_) => const DesignDemoPage(),
-  '/dashboard-demo': (_) => const DashboardDemoPage(),
+  '/dashboard': (_) => const DashboardPage(),
   '/login': (_) => const LoginPage(),
       },
     );
