@@ -1,11 +1,27 @@
 import 'package:flutter/material.dart';
+import 'figma_widgets.dart';
+import 'figma_index.dart';
 
 void main() {
   runApp(const AgilApp());
 }
 
-class AgilApp extends StatelessWidget {
+class AgilApp extends StatefulWidget {
   const AgilApp({super.key});
+
+  @override
+  State<AgilApp> createState() => _AgilAppState();
+}
+
+class _AgilAppState extends State<AgilApp> {
+  @override
+  void initState() {
+    super.initState();
+    // Pre-cache figma assets after first frame so images are ready when screens are opened.
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      FigmaAssets.precacheAll(context);
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -14,23 +30,7 @@ class AgilApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: const HomePage(),
-    );
-  }
-}
-
-class HomePage extends StatelessWidget {
-  const HomePage({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('AgilApp'),
-      ),
-      body: const Center(
-        child: Text('Bienvenido a AgilApp!'),
-      ),
+      home: const FigmaIndex(),
     );
   }
 }
