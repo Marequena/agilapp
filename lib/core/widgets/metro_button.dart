@@ -10,6 +10,7 @@ class MetroButton extends StatelessWidget {
   final VoidCallback? onPressed;
   final MetroVariant variant;
   final MetroSize size;
+  final bool fullWidth;
 
   const MetroButton({
     Key? key,
@@ -18,6 +19,7 @@ class MetroButton extends StatelessWidget {
     this.onPressed,
     this.variant = MetroVariant.primary,
     this.size = MetroSize.medium,
+  this.fullWidth = false,
   }) : super(key: key);
 
   double get _height {
@@ -56,27 +58,31 @@ class MetroButton extends StatelessWidget {
   Widget build(BuildContext context) {
     final bg = _bgForVariant(context);
     final fg = _fgForVariant(context);
-    return SizedBox(
-      height: _height,
-      child: Material(
-        color: bg,
-        child: InkWell(
-          onTap: onPressed,
-          child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 16),
-            child: Row(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                if (icon != null) ...[
-                  Icon(icon, color: fg, size: _height * 0.4),
-                  const SizedBox(width: 12),
-                ],
-                Text(label, style: TextStyle(color: fg, fontSize: _height * 0.28, fontWeight: FontWeight.w600)),
+    final child = Material(
+      color: bg,
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
+      child: InkWell(
+        onTap: onPressed,
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 16),
+          child: Row(
+            mainAxisAlignment: fullWidth ? MainAxisAlignment.start : MainAxisAlignment.center,
+            children: [
+              if (icon != null) ...[
+                Icon(icon, color: fg, size: _height * 0.45),
+                const SizedBox(width: 12),
               ],
-            ),
+              Flexible(child: Text(label, style: TextStyle(color: fg, fontSize: _height * 0.28, fontWeight: FontWeight.w700))),
+            ],
           ),
         ),
       ),
+    );
+
+    return SizedBox(
+      height: _height,
+      width: fullWidth ? double.infinity : null,
+      child: child,
     );
   }
 }

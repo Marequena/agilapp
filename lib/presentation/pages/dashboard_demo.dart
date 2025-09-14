@@ -43,14 +43,22 @@ class DashboardDemoPage extends StatelessWidget {
         child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
           const Text('Accesos rápidos', style: TextStyle(fontSize: 18, fontWeight: FontWeight.w600)),
           const SizedBox(height: 12),
-          // Grid/wrap of metro buttons for system actions
-          Wrap(spacing: 12, runSpacing: 12, children: [
-            MetroButton(label: 'Ventas', icon: Icons.point_of_sale, variant: MetroVariant.primary, onPressed: () {}),
-            MetroButton(label: 'Clientes', icon: Icons.people, variant: MetroVariant.success, onPressed: () {}),
-            MetroButton(label: 'Reportes', icon: Icons.pie_chart, variant: MetroVariant.warning, onPressed: () {}),
-            MetroButton(label: 'Inventario', icon: Icons.inventory, variant: MetroVariant.neutral, onPressed: () {}),
-            MetroButton(label: 'Ajustes', icon: Icons.settings, variant: MetroVariant.primary, onPressed: () {}),
-          ]),
+          // Grid of metro buttons that occupy available width
+          Expanded(
+            child: GridView.count(
+              crossAxisCount: 2,
+              mainAxisSpacing: 12,
+              crossAxisSpacing: 12,
+              childAspectRatio: 3,
+              children: [
+                MetroButton(label: 'Ventas', icon: Icons.point_of_sale, variant: MetroVariant.primary, size: MetroSize.large, fullWidth: true, onPressed: () {}),
+                MetroButton(label: 'Clientes', icon: Icons.people, variant: MetroVariant.success, size: MetroSize.medium, fullWidth: true, onPressed: () {}),
+                MetroButton(label: 'Reportes', icon: Icons.pie_chart, variant: MetroVariant.warning, size: MetroSize.medium, fullWidth: true, onPressed: () {}),
+                MetroButton(label: 'Inventario', icon: Icons.inventory, variant: MetroVariant.neutral, size: MetroSize.large, fullWidth: true, onPressed: () {}),
+                MetroButton(label: 'Ajustes', icon: Icons.settings, variant: MetroVariant.primary, size: MetroSize.small, fullWidth: true, onPressed: () {}),
+              ],
+            ),
+          ),
         ]),
       ),
     );
