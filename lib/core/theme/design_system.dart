@@ -14,6 +14,16 @@ class DesignColors {
   static const warning = Color(0xFFF59E0B);
   static const error = Color(0xFFDC2626);
   static const info = Color(0xFF2563EB);
+
+  // Dark theme variants
+  static const backgroundDark = Color(0xFF0F172A);
+  static const surfaceDark = Color(0xFF0B1220);
+  static const textOnDark = Color(0xFFE6EEF6);
+
+  // Tokens
+  static const elevation1 = 2.0;
+  static const elevation2 = 6.0;
+  static const cornerRadius = 10.0;
 }
 
 class AppTypography {
@@ -77,6 +87,27 @@ class AppTheme {
         errorBorder: OutlineInputBorder(borderRadius: BorderRadius.circular(8), borderSide: BorderSide(color: DesignColors.error)),
       ),
       snackBarTheme: const SnackBarThemeData(behavior: SnackBarBehavior.floating),
+    );
+  }
+
+  static ThemeData dark() {
+    final base = ThemeData.dark();
+    return base.copyWith(
+      colorScheme: ColorScheme.fromSeed(seedColor: DesignColors.primary, brightness: Brightness.dark),
+      scaffoldBackgroundColor: DesignColors.backgroundDark,
+      cardColor: DesignColors.surfaceDark,
+      dividerColor: Colors.grey.shade800,
+      textTheme: AppTypography.textTheme.apply(bodyColor: DesignColors.textOnDark, displayColor: DesignColors.textOnDark),
+      appBarTheme: const AppBarTheme(backgroundColor: DesignColors.surfaceDark, elevation: 0),
+      elevatedButtonTheme: ElevatedButtonThemeData(
+        style: ElevatedButton.styleFrom(
+          backgroundColor: DesignColors.primary,
+          foregroundColor: Colors.white,
+          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(DesignColors.cornerRadius)),
+          elevation: DesignColors.elevation1,
+        ),
+      ),
+      inputDecorationTheme: const InputDecorationTheme(filled: true, fillColor: Color(0xFF0B1220)),
     );
   }
 }

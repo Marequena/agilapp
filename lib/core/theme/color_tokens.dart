@@ -36,4 +36,13 @@ class ColorTokens {
       900: Color(0xFFE32E2E),
     },
   );
+
+  // Convenience accessors for plain Colors
+  static const Color primary = Color(_primaryValue);
+  static const Color secondary = Color(_secondaryValue);
+
+  // Small helper to build a ColorScheme seed from primary color
+  static ColorScheme toColorScheme(Brightness brightness) {
+    return ColorScheme.fromSeed(seedColor: primary, brightness: brightness);
+  }
 }

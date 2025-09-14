@@ -3,12 +3,14 @@ import '../../core/theme/design_system.dart';
 import '../../core/widgets/app_button.dart';
 import '../../core/widgets/app_input.dart';
 import '../../core/widgets/app_card.dart';
+// Provider not required here; keep demo self-contained.
 
 class DesignDemoPage extends StatelessWidget {
   const DesignDemoPage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+  // Demo-only: keep actions local to avoid depending on controllers.
     return Scaffold(
       appBar: AppBar(title: const Text('Design system demo')),
       body: SingleChildScrollView(
@@ -27,9 +29,13 @@ class DesignDemoPage extends StatelessWidget {
           Text('Buttons', style: Theme.of(context).textTheme.displaySmall),
           const SizedBox(height: 8),
           Row(children: [
-            AppButton(label: 'Primary', onPressed: () {}),
+            AppButton(label: 'Primary', onPressed: () {}, variant: AppButtonVariant.primary, icon: Icons.check),
             const SizedBox(width: 12),
-            AppButton(label: 'Outline', outline: true, onPressed: () {}),
+            AppButton(label: 'Secondary', onPressed: () {}, variant: AppButtonVariant.secondary),
+            const SizedBox(width: 12),
+            AppButton(label: 'Ghost', onPressed: () {}, variant: AppButtonVariant.ghost),
+            const SizedBox(width: 12),
+            AppButton(label: 'Outline', onPressed: () {}, variant: AppButtonVariant.outline),
           ]),
           const SizedBox(height: 20),
           Text('Inputs', style: Theme.of(context).textTheme.displaySmall),
@@ -39,6 +45,14 @@ class DesignDemoPage extends StatelessWidget {
           Text('Cards', style: Theme.of(context).textTheme.displaySmall),
           const SizedBox(height: 8),
           const AppCard(child: Text('Contenido dentro de una card')),
+          const SizedBox(height: 20),
+          Text('Theme', style: Theme.of(context).textTheme.displaySmall),
+          const SizedBox(height: 8),
+          Row(children: [
+            ElevatedButton(onPressed: () => ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Theme toggle not implemented'))), child: const Text('Toggle Theme')),
+            const SizedBox(width: 12),
+            AppButton(label: 'Sample action', onPressed: () { ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Sample action'))); }, variant: AppButtonVariant.primary),
+          ])
         ]),
       ),
     );

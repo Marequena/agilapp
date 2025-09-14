@@ -30,9 +30,14 @@ class AgilApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final lightScheme = ColorTokens.toColorScheme(Brightness.light);
+    final darkScheme = ColorTokens.toColorScheme(Brightness.dark);
+
     return MaterialApp(
       title: 'AgilApp',
-      theme: AppTheme.light().copyWith(primaryColor: ColorTokens.primarySwatch),
+      debugShowCheckedModeBanner: false,
+      theme: ThemeData.from(colorScheme: lightScheme, textTheme: AppTheme.light().textTheme),
+      darkTheme: ThemeData.from(colorScheme: darkScheme, textTheme: AppTheme.dark().textTheme),
       routes: {
   '/': (_) => const SplashPage(),
   '/design-demo': (_) => const DesignDemoPage(),
