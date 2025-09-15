@@ -39,6 +39,22 @@ class _SettingsPageState extends State<SettingsPage> {
     await _loadFailed();
   }
 
+  Future<void> _confirmDelete(int idx) async {
+    final ok = await showDialog<bool>(context: context, builder: (ctx) {
+      return AlertDialog(
+        title: const Text('Confirmar eliminación'),
+        content: const Text('¿Eliminar este item fallido permanentemente?'),
+        actions: [
+          TextButton(onPressed: () => Navigator.of(ctx).pop(false), child: const Text('Cancelar')),
+          TextButton(onPressed: () => Navigator.of(ctx).pop(true), child: const Text('Eliminar')),
+        ],
+      );
+    });
+    if (ok == true) {
+      await _delete(idx);
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -70,10 +86,10 @@ class _SettingsPageState extends State<SettingsPage> {
                       child: Text(pretty, style: const TextStyle(fontFamily: 'monospace')),
                     ),
                   ),
-                  OverflowBar(children: [
-                    TextButton.icon(onPressed: () => _retry(idx), icon: const Icon(Icons.refresh), label: const Text('Retry')),
-                    TextButton.icon(onPressed: () => _delete(idx), icon: const Icon(Icons.delete), label: const Text('Delete')),
-                  ])
+                    OverflowBar(children: [
+                      TextButton.icon(onPressed: () => _retry(idx), icon: const Icon(Icons.refresh), label: const Text('Retry')),
+                      TextButton.icon(onPressed: () => _confirmDelete(idx), icon: const Icon(Icons.delete), label: const Text('Delete')),
+                    ])
                 ],
               ),
             );
