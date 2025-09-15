@@ -134,4 +134,28 @@ class SyncService {
       // ignore
     }
   }
+
+  /// Requeue a failed item (reset attempts and move to pending items), then flush.
+  Future<void> requeueFailedItem(Map item) async {
+    final box = await LocalStorage.openBox(LocalStorage.pendingBox);
+    final failed = (box.get('failed_items', defaultValue: []) as List).toList();
+    final remainingFailed = failed.where((f) => f != item).toList();
+    await box.put('failed_items', remainingFailed);
+    final items = (box.get('items', defaultValue: []) as List).toList();
+    final copy = Map<String, dynamic>.from(item);
+    copy['attempts'] = 0;
+    items.add(copy);
+    await box.put('items', items);
+    // attempt flush
+    SyncNotifier().setSyncing(true);
+    await _flushPending();
+    SyncNotifier().setSyncing(false);
+  }
+
+  Future<void> deleteFailedItem(Map item) async {
+    final box = await LocalStorage.openBox(LocalStorage.pendingBox);
+    final failed = (box.get('failed_items', defaultValue: []) as List).toList();
+    final remainingFailed = failed.where((f) => f != item).toList();
+    await box.put('failed_items', remainingFailed);
+  }
 }

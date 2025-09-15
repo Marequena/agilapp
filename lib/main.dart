@@ -19,6 +19,7 @@ import 'presentation/pages/splash_page.dart';
 import 'presentation/pages/login_page.dart';
 import 'presentation/pages/customers_list_page.dart';
 import 'presentation/pages/products_list_page.dart';
+import 'presentation/pages/settings_page.dart';
 import 'presentation/pages/customer_form_page.dart';
 import 'data/repositories/sample_repository_impl.dart';
 import 'domain/usecases/get_items.dart';
@@ -82,6 +83,7 @@ class AgilApp extends StatelessWidget {
   '/customers': (_) => const CustomersListPage(),
   '/customers/new': (_) => const CustomerFormPage(),
   '/products': (_) => const ProductsListPage(),
+    '/settings': (_) => const SettingsPage(),
     },
     );
   }
