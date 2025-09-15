@@ -120,6 +120,8 @@ class DashboardPage extends StatelessWidget {
                       onTap = () => Navigator.of(context).pushNamed('/products');
                     } else if (labels[index] == 'Clientes') {
                       onTap = () => Navigator.of(context).pushNamed('/customers');
+                    } else if (labels[index] == 'Ajustes') {
+                      onTap = () => Navigator.of(context).pushNamed('/settings');
                     } else {
                       onTap = () {};
                     }
