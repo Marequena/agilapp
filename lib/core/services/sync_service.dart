@@ -41,22 +41,40 @@ class SyncService {
       final items = (box.get('items', defaultValue: []) as List).toList();
       if (items.isEmpty) return;
       final remaining = <dynamic>[];
+      final failed = <dynamic>[];
       for (final it in items) {
         try {
           if (it is Map) {
+            // ensure attempts counter
+            final attempts = (it['attempts'] is int) ? it['attempts'] as int : 0;
+            if (attempts >= 3) {
+              // give up, move to failed
+              failed.add(it);
+              continue;
+            }
             final method = (it['method'] ?? 'GET').toString().toUpperCase();
             final endpoint = it['endpoint']?.toString() ?? '';
             final payload = it['payload'];
             late final response;
-            if (method == 'POST') {
-              response = await _api.post(endpoint, data: payload);
-            } else if (method == 'PUT') {
-              response = await _api.put(endpoint, data: payload);
-            } else if (method == 'DELETE') {
-              response = await _api.delete(endpoint);
-            } else {
-              // fallback to GET for other methods in this simple implementation
-              response = await _api.get(endpoint);
+            try {
+              if (method == 'POST') {
+                response = await _api.post(endpoint, data: payload);
+              } else if (method == 'PUT') {
+                response = await _api.put(endpoint, data: payload);
+              } else if (method == 'DELETE') {
+                response = await _api.delete(endpoint);
+              } else {
+                // fallback to GET for other methods in this simple implementation
+                response = await _api.get(endpoint);
+              }
+            } catch (e) {
+              // increment attempts and requeue
+              it['attempts'] = attempts + 1;
+              // exponential backoff sleep before continuing
+              final delayMs = 500 * (1 << attempts);
+              await Future.delayed(Duration(milliseconds: delayMs));
+              remaining.add(it);
+              continue;
             }
             if (response.statusCode == 200 || response.statusCode == 201) {
               // if response contains entity, persist to relevant box by heuristics
@@ -82,15 +100,36 @@ class SyncService {
               }
               // else assume success and drop
             } else {
-              // keep it
-              remaining.add(it);
+              // non-2xx -> increment attempts and keep it for retry
+              final newAttempts = ((it['attempts'] is int) ? it['attempts'] as int : 0) + 1;
+              it['attempts'] = newAttempts;
+              if (newAttempts >= 3) {
+                failed.add(it);
+              } else {
+                remaining.add(it);
+              }
             }
           }
         } catch (e) {
-          remaining.add(it);
+          // unexpected error, increment attempt and requeue unless max
+          if (it is Map) {
+            final a = (it['attempts'] is int) ? it['attempts'] as int : 0;
+            if (a + 1 >= 3) {
+              failed.add(it);
+            } else {
+              it['attempts'] = a + 1;
+              remaining.add(it);
+            }
+          } else {
+            remaining.add(it);
+          }
         }
       }
       await box.put('items', remaining);
+      if (failed.isNotEmpty) {
+        final oldFailed = box.get('failed_items', defaultValue: []) as List;
+        await box.put('failed_items', [...oldFailed, ...failed]);
+      }
     } catch (e) {
       // ignore
     }
