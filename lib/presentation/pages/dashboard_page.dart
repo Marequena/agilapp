@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:hive_flutter/hive_flutter.dart';
+import '../../core/data/local_storage.dart';
 import 'package:provider/provider.dart';
 import '../../core/theme/color_tokens.dart';
 import '../../presentation/controllers/auth_controller.dart';
@@ -86,9 +88,9 @@ class DashboardPage extends StatelessWidget {
                   crossAxisSpacing: 12,
                   itemCount: 10,
                   itemBuilder: (context, index) {
-                    final labels = ['Ventas', 'Clientes', 'Reportes', 'Inventario', 'Ajustes', 'Usuarios', 'Pagos', 'Calendario', 'Notificaciones', 'Soporte'];
+                    final labels = ['Productos', 'Clientes', 'Reportes', 'Inventario', 'Ajustes', 'Usuarios', 'Pagos', 'Calendario', 'Notificaciones', 'Soporte'];
                     final icons = [
-                      Icons.point_of_sale,
+                      Icons.inventory_2,
                       Icons.people,
                       Icons.bar_chart,
                       Icons.inventory,
@@ -113,17 +115,48 @@ class DashboardPage extends StatelessWidget {
                     ];
 
                     // varied heights to mimic Metro live tile sizes
-                    final heights = [180.0, 120.0, 140.0, 160.0, 100.0, 140.0, 120.0, 160.0, 130.0, 150.0];
+                    final heights = [180.0, 120.0, 140.0, 160.0, 120.0, 140.0, 120.0, 160.0, 130.0, 150.0];
 
                     VoidCallback? onTap;
-                    if (labels[index] == 'Ventas') {
+                    if (labels[index] == 'Productos') {
                       onTap = () => Navigator.of(context).pushNamed('/products');
                     } else if (labels[index] == 'Clientes') {
                       onTap = () => Navigator.of(context).pushNamed('/customers');
+                    } else if (labels[index] == 'Ajustes') {
+                      onTap = () => Navigator.of(context).pushNamed('/settings');
                     } else {
                       onTap = () {};
                     }
 
+                    if (labels[index] == 'Ajustes') {
+                      return ValueListenableBuilder<Box>(
+                        valueListenable: Hive.box(LocalStorage.pendingBox).listenable(),
+                        builder: (context, box, _) {
+                          final failed = (box.get('failed_items', defaultValue: []) as List).length;
+                          return Stack(
+                            children: [
+                              MetroTile(label: labels[index], icon: icons[index], color: colors[index], height: heights[index], onTap: onTap),
+                              Positioned(
+                                right: 8,
+                                top: 8,
+                                child: AnimatedSwitcher(
+                                  duration: const Duration(milliseconds: 350),
+                                  transitionBuilder: (child, anim) => ScaleTransition(scale: anim, child: FadeTransition(opacity: anim, child: child)),
+                                  child: failed > 0
+                                      ? Container(
+                                          key: ValueKey(failed),
+                                          padding: const EdgeInsets.all(6),
+                                          decoration: BoxDecoration(color: Colors.red.shade700, borderRadius: BorderRadius.circular(12)),
+                                          child: Text('$failed', style: const TextStyle(color: Colors.white, fontSize: 12, fontWeight: FontWeight.bold)),
+                                        )
+                                      : const SizedBox.shrink(),
+                                ),
+                              )
+                            ],
+                          );
+                        },
+                      );
+                    }
                     return MetroTile(label: labels[index], icon: icons[index], color: colors[index], height: heights[index], onTap: onTap);
                   },
                 ),

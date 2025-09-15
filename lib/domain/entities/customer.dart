@@ -21,6 +21,16 @@ class BillingInfo {
       billingPhone: json['billing_phone']?.toString(),
     );
   }
+
+  Map<String, dynamic> toJson() => {
+        'billing_name': billingName,
+        'billing_address': billingAddress,
+        'billing_city': billingCity,
+        'billing_state': billingState,
+        'billing_zip': billingZip,
+        'billing_country': billingCountry,
+        'billing_phone': billingPhone,
+      };
 }
 
 class ShippingInfo {
@@ -46,6 +56,16 @@ class ShippingInfo {
       shippingPhone: json['shipping_phone']?.toString(),
     );
   }
+
+  Map<String, dynamic> toJson() => {
+        'shipping_name': shippingName,
+        'shipping_address': shippingAddress,
+        'shipping_city': shippingCity,
+        'shipping_state': shippingState,
+        'shipping_zip': shippingZip,
+        'shipping_country': shippingCountry,
+        'shipping_phone': shippingPhone,
+      };
 }
 
 class CompanyInfo {
@@ -69,6 +89,15 @@ class CompanyInfo {
       dateOfCreation: json['date_of_creation']?.toString(),
     );
   }
+
+  Map<String, dynamic> toJson() => {
+        'total_invoice_sum': totalInvoiceSum,
+        'total_invoice': totalInvoice,
+        'average_sale': averageSale,
+        'balance': balance,
+        'overdue': overdue,
+        'date_of_creation': dateOfCreation,
+      };
 }
 
 class Invoice {
@@ -90,6 +119,14 @@ class Invoice {
       status: json['status']?.toString(),
     );
   }
+
+  Map<String, dynamic> toJson() => {
+        'invoice_id': invoiceId,
+        'issue_date': issueDate,
+        'due_date': dueDate,
+        'due_amount': dueAmount,
+        'status': status,
+      };
 }
 
 class Customer {
@@ -118,5 +155,17 @@ class Customer {
       invoices: (json['invoices'] is List) ? (json['invoices'] as List).map((e) => Invoice.fromJson(e as Map<String, dynamic>?)).toList() : [],
     );
   }
+
+  Map<String, dynamic> toJson() => {
+        'id': id,
+        'customer_id': customerId,
+        'name': name,
+        'email': email,
+        'contact': contact,
+        'billing_info': billingInfo.toJson(),
+        'shipping_info': shippingInfo.toJson(),
+        'company_info': companyInfo.toJson(),
+        'invoices': invoices.map((i) => i.toJson()).toList(),
+      };
 }
 

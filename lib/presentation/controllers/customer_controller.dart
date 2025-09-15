@@ -2,12 +2,28 @@ import 'package:flutter/material.dart';
 import '../../domain/entities/customer.dart';
 import '../../domain/usecases/get_customers.dart';
 import '../../domain/repositories/customer_repository.dart';
+import '../../core/services/sync_notifier.dart';
+
 
 class CustomerController extends ChangeNotifier {
   final GetCustomers getCustomers;
   final CustomerRepository repository;
 
-  CustomerController(this.getCustomers, this.repository);
+  CustomerController(this.getCustomers, this.repository) {
+    _bindSync();
+  }
+  // subscribe to sync events
+  void _bindSync() {
+    try {
+      final notifier = SyncNotifier();
+      notifier.addListener(() {
+        if (!notifier.syncing) {
+          // refresh after sync finishes
+          load();
+        }
+      });
+    } catch (_) {}
+  }
 
   bool loading = false;
   List<Customer> customers = [];

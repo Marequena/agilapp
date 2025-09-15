@@ -51,11 +51,11 @@ class DashboardDemoPage extends StatelessWidget {
               crossAxisSpacing: 12,
               childAspectRatio: 3,
               children: [
-                MetroButton(label: 'Ventas', icon: Icons.point_of_sale, variant: MetroVariant.primary, size: MetroSize.large, fullWidth: true, onPressed: () {}),
+                MetroButton(label: 'Productos', icon: Icons.inventory_2, variant: MetroVariant.primary, size: MetroSize.large, fullWidth: true, onPressed: () {}),
                 MetroButton(label: 'Clientes', icon: Icons.people, variant: MetroVariant.success, size: MetroSize.medium, fullWidth: true, onPressed: () {}),
                 MetroButton(label: 'Reportes', icon: Icons.pie_chart, variant: MetroVariant.warning, size: MetroSize.medium, fullWidth: true, onPressed: () {}),
                 MetroButton(label: 'Inventario', icon: Icons.inventory, variant: MetroVariant.neutral, size: MetroSize.large, fullWidth: true, onPressed: () {}),
-                MetroButton(label: 'Ajustes', icon: Icons.settings, variant: MetroVariant.primary, size: MetroSize.small, fullWidth: true, onPressed: () {}),
+                MetroButton(label: 'Ajustes', icon: Icons.settings, variant: MetroVariant.primary, size: MetroSize.medium, fullWidth: true, onPressed: () {}),
               ],
             ),
           ),
