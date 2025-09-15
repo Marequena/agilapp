@@ -13,23 +13,23 @@ class CategoryRepositoryImpl implements CategoryRepository {
     try {
       final res = await _apiClient.get('/api/category/list');
       final data = res.data;
-      List<Category> cats = [];
+      List<Map<String, dynamic>> maps = [];
       if (data is List) {
-        cats = data.map((e) => Category.fromJson(e as Map<String, dynamic>)).toList();
+        maps = data.map((e) => Map<String, dynamic>.from(e as Map)).toList();
       } else if (data is Map && data['categories'] is List) {
-        cats = (data['categories'] as List).map((e) => Category.fromJson(e as Map<String, dynamic>)).toList();
+        maps = (data['categories'] as List).map((e) => Map<String, dynamic>.from(e as Map)).toList();
       } else if (data is Map && data['data'] is List) {
-        cats = (data['data'] as List).map((e) => Category.fromJson(e as Map<String, dynamic>)).toList();
+        maps = (data['data'] as List).map((e) => Map<String, dynamic>.from(e as Map)).toList();
       }
       final box = await LocalStorage.openBox(LocalStorage.categoriesBox);
-      await box.put('all_categories', cats.map((c) => c.toJson()).toList());
-      return cats;
+      await box.put('all_categories', maps);
+      return maps;
     } catch (e) {
-      // fallback
+      // fallback to local
     }
     final box = await LocalStorage.openBox(LocalStorage.categoriesBox);
     final raw = box.get('all_categories');
-    if (raw is List) return raw.map((e) => Category.fromJson(Map<String, dynamic>.from(e as Map))).toList();
+    if (raw is List) return raw.map((e) => Map<String, dynamic>.from(e as Map)).toList();
     return [];
   }
 

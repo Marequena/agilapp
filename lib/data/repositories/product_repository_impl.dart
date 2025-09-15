@@ -13,18 +13,18 @@ class ProductRepositoryImpl implements ProductRepository {
     try {
       final res = await _apiClient.get('/api/product-services/full-details');
       final data = res.data;
-      List<Product> products = [];
+      List<Map<String, dynamic>> maps = [];
       if (data is List) {
-        products = data.map((e) => Product.fromJson(e as Map<String, dynamic>)).toList();
+        maps = data.map((e) => e as Map<String, dynamic>).toList();
       } else if (data is Map && data['product_services'] is List) {
-        products = (data['product_services'] as List).map((e) => Product.fromJson(e as Map<String, dynamic>)).toList();
+        maps = (data['product_services'] as List).map((e) => e as Map<String, dynamic>).toList();
       } else if (data is Map && data['products'] is List) {
-        products = (data['products'] as List).map((e) => Product.fromJson(e as Map<String, dynamic>)).toList();
+        maps = (data['products'] as List).map((e) => e as Map<String, dynamic>).toList();
       }
-      // persist
+      // persist raw maps
       final box = await LocalStorage.openBox(LocalStorage.productsBox);
-      await box.put('all_products', products.map((p) => p.toJson()).toList());
-      return products;
+      await box.put('all_products', maps);
+      return maps;
     } catch (e) {
       // fallback to local
     }
@@ -32,7 +32,7 @@ class ProductRepositoryImpl implements ProductRepository {
     final box = await LocalStorage.openBox(LocalStorage.productsBox);
     final raw = box.get('all_products');
     if (raw is List) {
-      return raw.map((e) => Product.fromJson(Map<String, dynamic>.from(e as Map))).toList();
+      return raw.map((e) => Map<String, dynamic>.from(e as Map)).toList();
     }
     return [];
   }

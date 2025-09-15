@@ -88,9 +88,9 @@ class DashboardPage extends StatelessWidget {
                   crossAxisSpacing: 12,
                   itemCount: 10,
                   itemBuilder: (context, index) {
-                    final labels = ['Ventas', 'Clientes', 'Reportes', 'Inventario', 'Ajustes', 'Usuarios', 'Pagos', 'Calendario', 'Notificaciones', 'Soporte'];
+                    final labels = ['Productos', 'Clientes', 'Reportes', 'Inventario', 'Ajustes', 'Usuarios', 'Pagos', 'Calendario', 'Notificaciones', 'Soporte'];
                     final icons = [
-                      Icons.point_of_sale,
+                      Icons.inventory_2,
                       Icons.people,
                       Icons.bar_chart,
                       Icons.inventory,
@@ -115,10 +115,10 @@ class DashboardPage extends StatelessWidget {
                     ];
 
                     // varied heights to mimic Metro live tile sizes
-                    final heights = [180.0, 120.0, 140.0, 160.0, 100.0, 140.0, 120.0, 160.0, 130.0, 150.0];
+                    final heights = [180.0, 120.0, 140.0, 160.0, 120.0, 140.0, 120.0, 160.0, 130.0, 150.0];
 
                     VoidCallback? onTap;
-                    if (labels[index] == 'Ventas') {
+                    if (labels[index] == 'Productos') {
                       onTap = () => Navigator.of(context).pushNamed('/products');
                     } else if (labels[index] == 'Clientes') {
                       onTap = () => Navigator.of(context).pushNamed('/customers');
