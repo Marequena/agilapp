@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import '../../core/theme/color_tokens.dart';
 import '../../presentation/controllers/auth_controller.dart';
 import '../../core/widgets/widgets.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
@@ -11,12 +12,15 @@ class DashboardPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        backgroundColor: ColorTokens.primary,
+        iconTheme: const IconThemeData(color: Colors.white),
+        titleTextStyle: const TextStyle(color: Colors.white, fontSize: 18, fontWeight: FontWeight.w600),
         title: const Text('Dashboard'),
         automaticallyImplyLeading: false, // hide default back button
         actions: [
           Builder(builder: (ctx) {
             return IconButton(
-              icon: const Icon(Icons.logout),
+                    icon: const Icon(Icons.logout),
               tooltip: 'Cerrar sesi\u00f3n',
               onPressed: () async {
                 try {
@@ -48,7 +52,19 @@ class DashboardPage extends StatelessWidget {
               ),
             ),
           ),
-          // Decorative composited background similar to the sample photo
+          // Optional image background (safe): cover the area and fallback if asset missing
+          Positioned.fill(
+            child: ClipRect(
+              child: Image.asset(
+                'assets/background.jpg',
+                fit: BoxFit.cover,
+                width: double.infinity,
+                height: double.infinity,
+                errorBuilder: (context, error, stackTrace) => const SizedBox.shrink(),
+              ),
+            ),
+          ),
+          // Decorative composited background similar to the sample photo (over image)
           Positioned.fill(
             child: Opacity(
               opacity: 1.0,
@@ -99,7 +115,16 @@ class DashboardPage extends StatelessWidget {
                     // varied heights to mimic Metro live tile sizes
                     final heights = [180.0, 120.0, 140.0, 160.0, 100.0, 140.0, 120.0, 160.0, 130.0, 150.0];
 
-                    return MetroTile(label: labels[index], icon: icons[index], color: colors[index], height: heights[index], onTap: () {});
+                    VoidCallback? onTap;
+                    if (labels[index] == 'Ventas') {
+                      onTap = () => Navigator.of(context).pushNamed('/products');
+                    } else if (labels[index] == 'Clientes') {
+                      onTap = () => Navigator.of(context).pushNamed('/customers');
+                    } else {
+                      onTap = () {};
+                    }
+
+                    return MetroTile(label: labels[index], icon: icons[index], color: colors[index], height: heights[index], onTap: onTap);
                   },
                 ),
               ),
