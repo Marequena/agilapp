@@ -1,10 +1,25 @@
 import 'package:flutter/material.dart';
 import '../../domain/entities/product.dart';
 import '../../domain/repositories/product_repository.dart';
+import '../../core/services/sync_notifier.dart';
 
 class ProductController extends ChangeNotifier {
   final ProductRepository repository;
-  ProductController(this.repository);
+  ProductController(this.repository) {
+    _bindSync();
+  }
+  // bind sync notifier
+  void _bindSync() {
+    try {
+      final notifier = SyncNotifier();
+      notifier.addListener(() {
+        if (!notifier.syncing) load();
+      });
+    } catch (_) {}
+  }
+  
+  // call bind
+  // ...existing code...
 
   bool loading = false;
   List<Product> products = [];

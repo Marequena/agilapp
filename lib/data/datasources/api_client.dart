@@ -38,4 +38,12 @@ class ApiClient {
   Future<Response> post(String path, {data, Map<String, dynamic>? queryParameters}) async {
     return _dio.post(path, data: data, queryParameters: queryParameters);
   }
+
+  Future<Response> put(String path, {data, Map<String, dynamic>? queryParameters}) async {
+    return _dio.put(path, data: data, queryParameters: queryParameters);
+  }
+
+  Future<Response> delete(String path, {Map<String, dynamic>? queryParameters}) async {
+    return _dio.delete(path, queryParameters: queryParameters);
+  }
 }

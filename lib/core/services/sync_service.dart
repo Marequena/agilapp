@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:connectivity_plus/connectivity_plus.dart';
 import '../data/local_storage.dart';
 import '../../data/datasources/api_client.dart';
+import 'sync_notifier.dart';
 
 class SyncService {
   static final SyncService _instance = SyncService._internal();
@@ -17,10 +18,14 @@ class SyncService {
     if (_running) return;
     _running = true;
     // initial attempt
-    await _flushPending();
+  SyncNotifier().setSyncing(true);
+  await _flushPending();
+  SyncNotifier().setSyncing(false);
     _sub = Connectivity().onConnectivityChanged.listen((event) async {
       if (event != ConnectivityResult.none) {
-        await _flushPending();
+    SyncNotifier().setSyncing(true);
+    await _flushPending();
+    SyncNotifier().setSyncing(false);
       }
     });
   }
@@ -45,6 +50,10 @@ class SyncService {
             late final response;
             if (method == 'POST') {
               response = await _api.post(endpoint, data: payload);
+            } else if (method == 'PUT') {
+              response = await _api.put(endpoint, data: payload);
+            } else if (method == 'DELETE') {
+              response = await _api.delete(endpoint);
             } else {
               // fallback to GET for other methods in this simple implementation
               response = await _api.get(endpoint);
@@ -57,16 +66,19 @@ class SyncService {
                 final list = boxC.get('all_customers') as List? ?? [];
                 list.add(data);
                 await boxC.put('all_customers', list);
+                SyncNotifier().setSyncing(false);
               } else if (data is Map && endpoint.contains('/products')) {
                 final boxP = await LocalStorage.openBox(LocalStorage.productsBox);
                 final list = boxP.get('all_products') as List? ?? [];
                 list.add(data);
                 await boxP.put('all_products', list);
+                SyncNotifier().setSyncing(false);
               } else if (data is Map && endpoint.contains('/categories')) {
                 final boxK = await LocalStorage.openBox(LocalStorage.categoriesBox);
                 final list = boxK.get('all_categories') as List? ?? [];
                 list.add(data);
                 await boxK.put('all_categories', list);
+                SyncNotifier().setSyncing(false);
               }
               // else assume success and drop
             } else {
