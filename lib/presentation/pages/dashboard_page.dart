@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:hive_flutter/hive_flutter.dart';
+import '../../core/data/local_storage.dart';
 import 'package:provider/provider.dart';
 import '../../core/theme/color_tokens.dart';
 import '../../presentation/controllers/auth_controller.dart';
@@ -126,6 +128,29 @@ class DashboardPage extends StatelessWidget {
                       onTap = () {};
                     }
 
+                    if (labels[index] == 'Ajustes') {
+                      return ValueListenableBuilder<Box>(
+                        valueListenable: Hive.box(LocalStorage.pendingBox).listenable(),
+                        builder: (context, box, _) {
+                          final failed = (box.get('failed_items', defaultValue: []) as List).length;
+                          return Stack(
+                            children: [
+                              MetroTile(label: labels[index], icon: icons[index], color: colors[index], height: heights[index], onTap: onTap),
+                              if (failed > 0)
+                                Positioned(
+                                  right: 8,
+                                  top: 8,
+                                  child: Container(
+                                    padding: const EdgeInsets.all(6),
+                                    decoration: BoxDecoration(color: Colors.red.shade700, borderRadius: BorderRadius.circular(12)),
+                                    child: Text('$failed', style: const TextStyle(color: Colors.white, fontSize: 12, fontWeight: FontWeight.bold)),
+                                  ),
+                                )
+                            ],
+                          );
+                        },
+                      );
+                    }
                     return MetroTile(label: labels[index], icon: icons[index], color: colors[index], height: heights[index], onTap: onTap);
                   },
                 ),
