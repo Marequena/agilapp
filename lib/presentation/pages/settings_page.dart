@@ -31,12 +31,16 @@ class _SettingsPageState extends State<SettingsPage> {
     final svc = SyncService();
     await svc.requeueFailedItem(failed[idx]);
     await _loadFailed();
+  if (!mounted) return;
+  ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Item re-enqueued for retry')));
   }
 
   Future<void> _delete(int idx) async {
     final svc = SyncService();
     await svc.deleteFailedItem(failed[idx]);
     await _loadFailed();
+  if (!mounted) return;
+  ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Item eliminado')));
   }
 
   Future<void> _confirmDelete(int idx) async {
