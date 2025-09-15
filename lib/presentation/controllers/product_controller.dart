@@ -5,17 +5,32 @@ import '../../core/services/sync_notifier.dart';
 
 class ProductController extends ChangeNotifier {
   final ProductRepository repository;
+  // keep reference to notifier and the callback so we can remove listener on dispose
+  SyncNotifier? _notifier;
+  VoidCallback? _syncListener;
+
   ProductController(this.repository) {
     _bindSync();
   }
   // bind sync notifier
   void _bindSync() {
     try {
-      final notifier = SyncNotifier();
-      notifier.addListener(() {
-        if (!notifier.syncing) load();
-      });
+      _notifier = SyncNotifier();
+      _syncListener = () {
+        if (!(_notifier?.syncing ?? false)) load();
+      };
+      _notifier?.addListener(_syncListener!);
     } catch (_) {}
+  }
+
+  @override
+  void dispose() {
+    try {
+      if (_notifier != null && _syncListener != null) {
+        _notifier?.removeListener(_syncListener!);
+      }
+    } catch (_) {}
+    super.dispose();
   }
   
   // call bind

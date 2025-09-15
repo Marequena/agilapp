@@ -6,8 +6,10 @@ class Product {
   final String? categoryId;
   final String? price;
   final String? stock;
+  final List<dynamic>? prices;
+  final String? image;
 
-  Product({required this.id, this.sku, this.name, this.description, this.categoryId, this.price, this.stock});
+  Product({required this.id, this.sku, this.name, this.description, this.categoryId, this.price, this.stock, this.prices, this.image});
 
   factory Product.fromJson(Map<String, dynamic>? json) {
     if (json == null) return Product(id: '');
@@ -22,8 +24,11 @@ class Product {
       name: json['name']?.toString(),
       description: json['description']?.toString(),
       categoryId: parseCategory(json['category_id'] ?? json['categoryId'] ?? json['category']),
-      price: json['price']?.toString(),
-      stock: json['stock']?.toString(),
+  price: json['price']?.toString(),
+  // prefer 'quantity' if present for stock
+  stock: (json['quantity'] ?? json['stock'])?.toString(),
+  prices: (json['prices'] as List?)?.map((e) => e).toList(),
+  image: json['image']?.toString() ?? json['image_url']?.toString(),
     );
   }
 
@@ -36,6 +41,8 @@ class Product {
       if (categoryId != null) 'category_id': categoryId,
       if (price != null) 'price': price,
       if (stock != null) 'stock': stock,
+    if (prices != null) 'prices': prices,
+    if (image != null) 'image': image,
     };
   }
 }

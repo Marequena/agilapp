@@ -5,6 +5,8 @@ class LocalStorage {
   static const productsBox = 'products_box';
   static const categoriesBox = 'categories_box';
   static const pendingBox = 'pending_writes_box';
+  static const salesBox = 'sales_box';
+  static const cartBox = 'cart_box';
 
   static Future<void> init(String path) async {
     Hive.init(path);

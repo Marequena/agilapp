@@ -88,14 +88,14 @@ class DashboardPage extends StatelessWidget {
                   crossAxisSpacing: 12,
                   itemCount: 10,
                   itemBuilder: (context, index) {
-                    final labels = ['Productos', 'Clientes', 'Reportes', 'Inventario', 'Ajustes', 'Usuarios', 'Pagos', 'Calendario', 'Notificaciones', 'Soporte'];
-                    final icons = [
+                    final labels = ['Productos', 'Clientes', 'Reportes', 'Ventas', 'Ajustes', 'Historial', 'Pagos', 'Calendario', 'Notificaciones', 'Soporte'];
+                      final icons = [
                       Icons.inventory_2,
                       Icons.people,
                       Icons.bar_chart,
-                      Icons.inventory,
+                      Icons.sell,
                       Icons.settings,
-                      Icons.person_add,
+                      Icons.history,
                       Icons.payment,
                       Icons.calendar_today,
                       Icons.notifications,
@@ -105,7 +105,7 @@ class DashboardPage extends StatelessWidget {
                       Colors.teal.shade400,
                       Colors.deepPurple.shade400,
                       Colors.amber.shade600,
-                      Colors.cyan.shade400,
+                      Colors.deepOrange.shade400,
                       Colors.indigo.shade600,
                       Colors.pink.shade400,
                       Colors.deepOrange.shade400,
@@ -124,6 +124,10 @@ class DashboardPage extends StatelessWidget {
                       onTap = () => Navigator.of(context).pushNamed('/customers');
                     } else if (labels[index] == 'Ajustes') {
                       onTap = () => Navigator.of(context).pushNamed('/settings');
+                    } else if (labels[index] == 'Ventas') {
+                      onTap = () => Navigator.of(context).pushNamed('/sales');
+                    } else if (labels[index] == 'Historial') {
+                      onTap = () => Navigator.of(context).pushNamed('/sales_history');
                     } else {
                       onTap = () {};
                     }

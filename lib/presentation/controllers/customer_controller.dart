@@ -8,6 +8,9 @@ import '../../core/services/sync_notifier.dart';
 class CustomerController extends ChangeNotifier {
   final GetCustomers getCustomers;
   final CustomerRepository repository;
+  // keep reference to notifier and callback so we can remove listener
+  SyncNotifier? _notifier;
+  VoidCallback? _syncListener;
 
   CustomerController(this.getCustomers, this.repository) {
     _bindSync();
@@ -15,13 +18,13 @@ class CustomerController extends ChangeNotifier {
   // subscribe to sync events
   void _bindSync() {
     try {
-      final notifier = SyncNotifier();
-      notifier.addListener(() {
-        if (!notifier.syncing) {
-          // refresh after sync finishes
+      _notifier = SyncNotifier();
+      _syncListener = () {
+        if (!(_notifier?.syncing ?? false)) {
           load();
         }
-      });
+      };
+      _notifier?.addListener(_syncListener!);
     } catch (_) {}
   }
 
@@ -77,5 +80,15 @@ class CustomerController extends ChangeNotifier {
       return true;
     }
     return false;
+  }
+
+  @override
+  void dispose() {
+    try {
+      if (_notifier != null && _syncListener != null) {
+        _notifier?.removeListener(_syncListener!);
+      }
+    } catch (_) {}
+    super.dispose();
   }
 }

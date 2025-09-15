@@ -79,6 +79,26 @@ class SyncService {
             if (response.statusCode == 200 || response.statusCode == 201) {
               // if response contains entity, persist to relevant box by heuristics
               final data = response.data;
+              // special handling: if this was a sale POST, update sales_box entry
+              if (endpoint.contains('/sales')) {
+                try {
+                  final salesBox = await LocalStorage.openBox(LocalStorage.salesBox);
+                  final current = (salesBox.get('items', defaultValue: []) as List).toList();
+                  // try to find by local_id in the payload
+                  if (payload is Map && payload['local_id'] != null) {
+                    final lid = payload['local_id'].toString();
+                    final idx = current.indexWhere((e) => (e is Map) && e['local_id'] == lid);
+                    if (idx >= 0) {
+                      final entry = Map<String, dynamic>.from(current[idx] as Map);
+                      entry['status'] = 'synced';
+                      // store server id if present in response
+                      if (data is Map && data['id'] != null) entry['server_id'] = data['id'];
+                      current[idx] = entry;
+                      await salesBox.put('items', current);
+                    }
+                  }
+                } catch (_) {}
+              }
               if (data is Map && endpoint.contains('/customers')) {
                 final boxC = await LocalStorage.openBox(LocalStorage.customersBox);
                 final list = boxC.get('all_customers') as List? ?? [];
@@ -157,5 +177,34 @@ class SyncService {
     final failed = (box.get('failed_items', defaultValue: []) as List).toList();
     final remainingFailed = failed.where((f) => f != item).toList();
     await box.put('failed_items', remainingFailed);
+  }
+
+  /// Requeue a sale stored in `sales_box` by its local_id.
+  Future<bool> requeueSaleFromSalesBox(String localId) async {
+    try {
+      final salesBox = await LocalStorage.openBox(LocalStorage.salesBox);
+      final current = (salesBox.get('items', defaultValue: []) as List).toList();
+      final idx = current.indexWhere((e) => (e is Map) && e['local_id'] == localId);
+      if (idx < 0) return false;
+      final saleEntry = Map<String, dynamic>.from(current[idx] as Map);
+      // prepare pending queue
+      final pending = await LocalStorage.openBox(LocalStorage.pendingBox);
+      final items = (pending.get('items', defaultValue: []) as List).toList();
+      final payload = Map<String, dynamic>.from(saleEntry);
+      // reset attempts
+      items.add({'method': 'POST', 'endpoint': '/api/sales', 'payload': payload, 'attempts': 0});
+      await pending.put('items', items);
+      // mark local sales entry as 'queued' again
+      saleEntry['status'] = 'queued';
+      current[idx] = saleEntry;
+      await salesBox.put('items', current);
+      // trigger flush
+      SyncNotifier().setSyncing(true);
+      await _flushPending();
+      SyncNotifier().setSyncing(false);
+      return true;
+    } catch (e) {
+      return false;
+    }
   }
 }

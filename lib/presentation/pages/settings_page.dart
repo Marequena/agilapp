@@ -13,6 +13,8 @@ class SettingsPage extends StatefulWidget {
 class _SettingsPageState extends State<SettingsPage> {
   List<Map<String, dynamic>> failed = [];
 
+  bool _busy = false;
+
   @override
   void initState() {
     super.initState();
@@ -25,6 +27,66 @@ class _SettingsPageState extends State<SettingsPage> {
     setState(() {
       failed = f.map((e) => Map<String, dynamic>.from(e as Map)).toList();
     });
+  }
+
+  Future<void> _requeueAllSales() async {
+    setState(() => _busy = true);
+    try {
+      final salesBox = await LocalStorage.openBox(LocalStorage.salesBox);
+      final current = (salesBox.get('items', defaultValue: []) as List).toList();
+      final svc = SyncService();
+      int enqueued = 0;
+      for (final e in current) {
+        if (e is Map && (e['status'] == 'queued' || e['status'] == null)) {
+          final lid = e['local_id']?.toString();
+          if (lid != null) {
+            final ok = await svc.requeueSaleFromSalesBox(lid);
+            if (ok) enqueued++;
+          }
+        }
+      }
+      if (!mounted) return;
+      ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('Reintentos encolados: $enqueued')));
+    } finally {
+      setState(() => _busy = false);
+    }
+  }
+
+  Future<void> _cleanSyncedSales() async {
+    final salesBox = await LocalStorage.openBox(LocalStorage.salesBox);
+    final current = (salesBox.get('items', defaultValue: []) as List).toList();
+    final remaining = current.where((e) => (e is Map) && e['status'] != 'synced').toList();
+    await salesBox.put('items', remaining);
+    if (!mounted) return;
+    ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Ventas sincronizadas limpiadas')));
+  }
+
+  Future<void> _archiveSyncedOlderThan(Duration age) async {
+    final salesBox = await LocalStorage.openBox(LocalStorage.salesBox);
+    final current = (salesBox.get('items', defaultValue: []) as List).toList();
+    final now = DateTime.now();
+    final remaining = <dynamic>[];
+    int archived = 0;
+    for (final e in current) {
+      if (e is Map && e['status'] == 'synced' && e['created_at'] != null) {
+        try {
+          final dt = DateTime.parse(e['created_at'].toString());
+          if (now.difference(dt) > age) {
+            archived++;
+            continue; // skip (archive)
+          }
+        } catch (_) {
+          // if parse fails, keep the item
+          remaining.add(e);
+          continue;
+        }
+      } else {
+        remaining.add(e);
+      }
+    }
+    await salesBox.put('items', remaining);
+    if (!mounted) return;
+    ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('Archivadas: $archived')));
   }
 
   Future<void> _retry(int idx) async {
@@ -62,7 +124,11 @@ class _SettingsPageState extends State<SettingsPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('Settings')),
+      appBar: AppBar(title: const Text('Settings'), actions: [
+        IconButton(onPressed: _busy ? null : _requeueAllSales, icon: const Icon(Icons.refresh), tooltip: 'Reintentar todo'),
+        IconButton(onPressed: _cleanSyncedSales, icon: const Icon(Icons.cleaning_services), tooltip: 'Limpiar sincronizadas'),
+        IconButton(onPressed: () => _archiveSyncedOlderThan(const Duration(days: 7)), icon: const Icon(Icons.archive), tooltip: 'Archivar >7d'),
+      ]),
       body: RefreshIndicator(
         onRefresh: _loadFailed,
         child: ListView.builder(
