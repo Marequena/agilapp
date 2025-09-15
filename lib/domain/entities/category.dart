@@ -15,4 +15,13 @@ class Category {
       type: json['type']?.toString(),
     );
   }
+
+  Map<String, dynamic> toJson() {
+    return {
+      'id': id,
+      if (name != null) 'name': name,
+      if (color != null) 'color': color,
+      if (type != null) 'type': type,
+    };
+  }
 }

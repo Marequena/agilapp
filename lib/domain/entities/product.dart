@@ -26,4 +26,16 @@ class Product {
       stock: json['stock']?.toString(),
     );
   }
+
+  Map<String, dynamic> toJson() {
+    return {
+      'id': id,
+      if (sku != null) 'sku': sku,
+      if (name != null) 'name': name,
+      if (description != null) 'description': description,
+      if (categoryId != null) 'category_id': categoryId,
+      if (price != null) 'price': price,
+      if (stock != null) 'stock': stock,
+    };
+  }
 }

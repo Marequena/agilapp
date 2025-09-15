@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'presentation/controllers/sample_controller.dart';
+import 'package:hive_flutter/hive_flutter.dart';
+import 'core/data/local_storage.dart';
 import 'presentation/controllers/auth_controller.dart';
 import 'presentation/controllers/customer_controller.dart';
 import 'presentation/controllers/product_controller.dart';
@@ -22,8 +24,17 @@ import 'data/repositories/sample_repository_impl.dart';
 import 'domain/usecases/get_items.dart';
 import 'core/theme/design_system.dart';
 import 'core/theme/color_tokens.dart';
+import 'core/services/sync_service.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Hive.initFlutter();
+  // open minimal boxes used by the app
+  await LocalStorage.openBox(LocalStorage.customersBox);
+  await LocalStorage.openBox(LocalStorage.productsBox);
+  await LocalStorage.openBox(LocalStorage.categoriesBox);
+  await LocalStorage.openBox(LocalStorage.pendingBox);
+  // continue with existing setup and then start the app
   final repo = SampleRepositoryImpl();
   final getItems = GetItems(repo);
   final authRepo = AuthRepositoryImpl();
@@ -35,16 +46,19 @@ void main() {
   // categories
   final categoryRepo = CategoryRepositoryImpl();
   final getCategories = GetCategories(categoryRepo);
+  // start background sync service
+  await SyncService().start();
   runApp(MultiProvider(
-      providers: [
-  Provider(create: (_) => SampleController(getItems)),
-  ChangeNotifierProvider(create: (_) => AuthController(authRepo)),
-  ChangeNotifierProvider(create: (_) => CustomerController(getCustomers, customerRepo)),
-  ChangeNotifierProvider(create: (_) => ProductController(productRepo)),
-  ChangeNotifierProvider(create: (_) => CategoryController(getCategories, categoryRepo)),
+    providers: [
+      Provider(create: (_) => SampleController(getItems)),
+      ChangeNotifierProvider(create: (_) => AuthController(authRepo)),
+      ChangeNotifierProvider(create: (_) => CustomerController(getCustomers, customerRepo)),
+      ChangeNotifierProvider(create: (_) => ProductController(productRepo)),
+      ChangeNotifierProvider(create: (_) => CategoryController(getCategories, categoryRepo)),
     ],
     child: const AgilApp(),
   ));
+
 }
 
 class AgilApp extends StatelessWidget {
