@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'dart:convert';
 import '../../core/data/local_storage.dart';
 import '../../core/services/sync_service.dart';
 
@@ -52,15 +53,28 @@ class _SettingsPageState extends State<SettingsPage> {
             }
             final idx = i - 1;
             final item = failed[idx];
+            final payload = item['payload'];
+            final pretty = payload != null ? JsonEncoder.withIndent('  ').convert(payload) : '{}';
             return Card(
               margin: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
-              child: ListTile(
+              child: ExpansionTile(
                 title: Text(item['endpoint']?.toString() ?? 'unknown'),
                 subtitle: Text(item['method']?.toString() ?? ''),
-                trailing: Row(mainAxisSize: MainAxisSize.min, children: [
-                  IconButton(onPressed: () => _retry(idx), icon: const Icon(Icons.refresh)),
-                  IconButton(onPressed: () => _delete(idx), icon: const Icon(Icons.delete)),
-                ]),
+                children: [
+                  Container(
+                    width: double.infinity,
+                    color: Colors.grey.shade100,
+                    padding: const EdgeInsets.all(12),
+                    child: SingleChildScrollView(
+                      scrollDirection: Axis.horizontal,
+                      child: Text(pretty, style: const TextStyle(fontFamily: 'monospace')),
+                    ),
+                  ),
+                  OverflowBar(children: [
+                    TextButton.icon(onPressed: () => _retry(idx), icon: const Icon(Icons.refresh), label: const Text('Retry')),
+                    TextButton.icon(onPressed: () => _delete(idx), icon: const Icon(Icons.delete), label: const Text('Delete')),
+                  ])
+                ],
               ),
             );
           },

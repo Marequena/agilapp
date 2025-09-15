@@ -136,16 +136,22 @@ class DashboardPage extends StatelessWidget {
                           return Stack(
                             children: [
                               MetroTile(label: labels[index], icon: icons[index], color: colors[index], height: heights[index], onTap: onTap),
-                              if (failed > 0)
-                                Positioned(
-                                  right: 8,
-                                  top: 8,
-                                  child: Container(
-                                    padding: const EdgeInsets.all(6),
-                                    decoration: BoxDecoration(color: Colors.red.shade700, borderRadius: BorderRadius.circular(12)),
-                                    child: Text('$failed', style: const TextStyle(color: Colors.white, fontSize: 12, fontWeight: FontWeight.bold)),
-                                  ),
-                                )
+                              Positioned(
+                                right: 8,
+                                top: 8,
+                                child: AnimatedSwitcher(
+                                  duration: const Duration(milliseconds: 350),
+                                  transitionBuilder: (child, anim) => ScaleTransition(scale: anim, child: FadeTransition(opacity: anim, child: child)),
+                                  child: failed > 0
+                                      ? Container(
+                                          key: ValueKey(failed),
+                                          padding: const EdgeInsets.all(6),
+                                          decoration: BoxDecoration(color: Colors.red.shade700, borderRadius: BorderRadius.circular(12)),
+                                          child: Text('$failed', style: const TextStyle(color: Colors.white, fontSize: 12, fontWeight: FontWeight.bold)),
+                                        )
+                                      : const SizedBox.shrink(),
+                                ),
+                              )
                             ],
                           );
                         },
